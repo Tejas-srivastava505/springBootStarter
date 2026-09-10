@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
 @RestController
-@RequestMapping("/journel")
+@RequestMapping("/journal")
 public class JournalEntryControllerV2 {
 
 
@@ -19,8 +19,7 @@ public class JournalEntryControllerV2 {
 
     @GetMapping
     public ArrayList<JournalEntry> getAll(){
-        jes.getAll();
-        return null;
+        return new ArrayList<>(jes.getAll());
     }
     @PostMapping
     public boolean addEntry(@RequestBody JournalEntry jy){
