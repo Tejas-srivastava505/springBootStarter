@@ -15,23 +15,27 @@ import java.util.Optional;
 public class JournalEntryService {
 
     @Autowired
-    private JournalEntryRepo journalEntryRepo; //implementation of this interface is manganed by spring.
-
+    private JournalEntryRepo journalEntryRepo; //implementation of this interface is managed by spring.
+    //To write.
     public void saveEntry(JournalEntry je){
         journalEntryRepo.save(je);
     }
+    //Similar to find()
+
     public List<JournalEntry> getAll(){
         return journalEntryRepo.findAll();
     }
-
+    //Used to find the object using ID
     public Optional<JournalEntry> getbyId(ObjectId id){ //
         return journalEntryRepo.findById(id);
     }
+    //Used to delete by id.
     public JournalEntry deleteById(ObjectId id){
         Optional<JournalEntry> old = this.getbyId(id);
         journalEntryRepo.deleteById(id);
         return old.orElse(null);
     }
+
 }
 
 

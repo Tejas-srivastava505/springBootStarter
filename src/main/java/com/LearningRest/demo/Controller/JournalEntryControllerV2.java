@@ -43,8 +43,15 @@ public class JournalEntryControllerV2 {
 
     @PutMapping("/user/{myId}")
     public JournalEntry updateById(@PathVariable ObjectId myId, @RequestBody JournalEntry je){
-        return null;
+        JournalEntry old =  jes.getbyId(myId).orElse(null); //get the object, if present.
+        if(old == null){
+            return addEntry(je);
+        }
+        //check if new is not null and empty
+        old.setTitle( ((!je.getTitle().isEmpty()) && (je.getTitle()!=null)) ? je.getTitle() : old.getTitle());
+        old.setContent( ((!je.getContent().isEmpty()) && (je.getContent()!=null)) ? je.getContent() : old.getContent());
+        jes.saveEntry(old);
+        return old;
     }
-
 
 }
